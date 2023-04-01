@@ -9,7 +9,7 @@ import java.util.List;
 public class GameController {
 
     public void undo(Game game){
-        game.undo();
+        game.undo(game);
     }
 
     public Game createGame(int dimension, List<Player> players){

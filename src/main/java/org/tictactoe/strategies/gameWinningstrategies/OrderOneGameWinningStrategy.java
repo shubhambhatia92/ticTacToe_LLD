@@ -1,5 +1,6 @@
 package org.tictactoe.strategies.gameWinningstrategies;
 
+import com.sun.source.tree.BreakTree;
 import org.tictactoe.models.Board;
 import org.tictactoe.models.Cell;
 import org.tictactoe.models.Player;
@@ -89,6 +90,37 @@ public class OrderOneGameWinningStrategy implements  GameWinningStrategy{
         }
         return false;
     }
+
+    @Override
+    public boolean doUndo(char symbol,int row , int col){
+       try {
+
+           if (rowSymbolCounts.get(row).containsKey(symbol)) {
+               rowSymbolCounts.get(row).put(symbol, rowSymbolCounts.get(row).get(symbol) - 1);
+           }
+           if (colSymbolCounts.get(col).containsKey(symbol)) {
+               colSymbolCounts.get(col).put(symbol, colSymbolCounts.get(col).get(symbol) - 1);
+           }
+           if (topLeftDiagSymbolCounts.containsKey(symbol)) {
+               topLeftDiagSymbolCounts.put(
+                       symbol,
+                       topLeftDiagSymbolCounts.get(symbol) - 1
+               );
+           }
+           if (topRightDiagSymbolCounts.containsKey(symbol)) {
+               topRightDiagSymbolCounts.put(
+                       symbol,
+                       topRightDiagSymbolCounts.get(symbol) - 1
+               );
+           }
+           return true;
+       }
+       catch (Exception e){
+           System.out.println(e.getMessage());
+           return  false;
+       }
+    }
+
 
     }
 

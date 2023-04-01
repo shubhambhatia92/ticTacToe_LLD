@@ -9,4 +9,6 @@ public interface GameWinningStrategy {
                         Player lastMovePlayer,
                         Cell moveCell);
     boolean checkDraw(int TotalMoveCount , int dimension);
+
+    public boolean doUndo(char symbol,int row , int col);
 }

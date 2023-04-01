@@ -83,9 +83,21 @@ public class Game  {
         return new Builder();
         }
 
-       public void undo(){
+       public void undo(Game game){
 
-       }
+           nextPlayerIndex -= 1;
+           nextPlayerIndex %= players.size();
+
+        Player toMovePlayer = players.get(nextPlayerIndex);
+        Move lastMove = moves.get(moves.size()-1);
+        moves.remove(moves.size()-1);
+        Cell lastMoveCell =lastMove.getCell();
+        lastMoveCell.setCellState(CellState.EMPTY);
+        char lastMoveSymbol = lastMoveCell.getPlayer().getSymbol();
+        gameWinningStrategy.doUndo(lastMoveSymbol , lastMoveCell.getRow(),lastMoveCell.getCol());
+        System.out.println("undo done by player - " + toMovePlayer.getName());
+
+    }
 
        public void makeNextMove(){
             Player toMovePlayer = players.get(nextPlayerIndex);
